@@ -1,0 +1,12 @@
+We have four classes, Neutral, Angry, Engaged and Happy. We used 505 images for each class and that gives a total of 2020 images. In these 2020 images, most of them are frontal face shots. 
+
+Provenance Information
+
+“Face expression recognition dataset”
+License type:(none)
+https://www.kaggle.com/datasets/jonathanoheix/face-expression-recognition-dataset
+
+“DAiSEE” dataset
+License type:(none)
+“DAiSEE is a multi-label video classification dataset comprising of 9,068 video snippets captured from 112 users for recognizing the user affective states of boredom, confusion, engagement, and frustration "in the wild". The dataset has four levels of labels namely - very low, low, high, and very high for each of the affective states, which are crowd annotated and correlated with a gold standard annotation created using a team of expert psychologists.”
+https://drive.google.com/file/d/1yrk_wyhZ-c7q0Mcyyi888ylFkl_JDELi/view
