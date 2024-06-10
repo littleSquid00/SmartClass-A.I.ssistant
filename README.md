@@ -4,7 +4,7 @@ Team Name - OB_14
 
 Team Members - Chit Chit Myet Cheal Zaw (40110140)
                Mehdi Chitsaz (40132819)
-               Name (ID)
+               Nadav Friedman (40091001)
 
 
 ### Project Structure
