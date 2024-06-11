@@ -1,19 +1,6 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import torch.optim as optim
-from torch.utils.data import DataLoader, Dataset
-from torchvision.datasets import ImageFolder
-from torchvision import transforms
-
-mini_batch_size = 50
-
-# Define the transform to convert the image to a tensor
-transform = transforms.Compose([
-    transforms.Grayscale(num_output_channels=1),  # Convert to grayscale
-    transforms.Resize((48, 48)),  # Resize to 48x48 pixels
-    transforms.ToTensor()  # Convert to tensor
-])
 
 class Model1(nn.Module):
     def __init__(self):
@@ -44,45 +31,3 @@ class Model1(nn.Module):
         out = self.fc_layer(flattened_out)
         out = F.log_softmax(out, dim=1)
         return out
-
-train_dataset = ImageFolder(root='data/train', transform=transform)
-test_dataset = ImageFolder(root='data/test', transform=transform)
-train_loader = DataLoader(train_dataset, batch_size=50, shuffle=True)
-test_loader = DataLoader(test_dataset, batch_size=len(test_dataset), shuffle=False)
-
-
-
-model = Model1()
-criterion = nn.CrossEntropyLoss()
-optimizer = optim.Adam(model.parameters(), lr=0.001)
-num_epochs = 10
-
-# Training
-for epoch in range(num_epochs):
-    model.train()
-    running_loss = 0.0
-    for inputs, labels in train_loader:
-        optimizer.zero_grad()
-        outputs = model(inputs)
-        loss = criterion(outputs, labels)
-        loss.backward()
-        optimizer.step()
-        running_loss += loss.item()
-    print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {running_loss/len(train_loader):.4f}')
-
-torch.save(model.state_dict(), 'model_info/model1/model1.pth')
-
-# Example: Iterate through the test dataset
-model.load_state_dict(torch.load('model_info/model1/model1.pth'))
-model.eval()
-test_inputs, test_labels = next(iter(test_loader))
-test_outputs = model(test_inputs)
-_, predicted = torch.max(test_outputs, 1)
-correct_predictions = torch.sum(predicted == test_labels).item()
-print(f"Number of correct predictions: {correct_predictions}")
-print(f"Total number of test samples: {len(test_labels)}")
-print(f"Accuracy: {correct_predictions / len(test_labels) * 100:.2f}%")
-
-f = open('model_info/model1/performance.txt', 'w')
-f.write(f'Test Accuracy: {correct_predictions / len(test_labels) * 100:.2f}%')
-f.close()
