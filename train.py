@@ -22,22 +22,14 @@ except AttributeError:
     print(f'Error: Module {full_module_name} does not have a class named {args.model_name}')
     sys.exit(1)
 
-# create instance of model
+# Create instance of model
 model = ModelClass()
 
 ##  Train Model
 try:
     print(f'Training Model...')
-    utils.train_model(model)
+    utils.train_model(model, args.model_name)
     print("Training Complete")
 except Exception as e:
     print(f'An unexpected error occurred: {e}')
     sys.exit(1)
-
-# ##  Evaluate Model
-# try:
-#     print(f'Evaluating Model...')
-#     utils.evaluate_model(model)
-# except Exception as e:
-#     print(f'An unexpected error occurred: {e}')
-#     sys.exit(1)

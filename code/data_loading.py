@@ -10,7 +10,6 @@ def load_all_data(mini_batch_size=50):
         transforms.ToTensor()  # Convert to tensor
     ])
 
-
     train_dataset = ImageFolder(root='data/train', transform=transform)
     train_size = int(0.75 * len(train_dataset))
     val_size = len(train_dataset) - train_size

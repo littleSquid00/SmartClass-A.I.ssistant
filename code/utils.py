@@ -7,7 +7,7 @@ import torch.nn as nn
 import torch.optim as optim
 from sklearn.metrics import accuracy_score
 
-def train_model(model):
+def train_model(model, model_name):
     # Get Data
     train_loader, val_loader, _ = load_all_data()
 
@@ -17,6 +17,7 @@ def train_model(model):
 
     # Initialize variables to track the best model and early stopping
     best_val_loss = float('inf')
+    best_val_acc = 0
     best_model_state = None
     patience = 5
     epochs_no_improve = 0
@@ -55,24 +56,30 @@ def train_model(model):
          # Check if the current model is the best
         if val_loss < best_val_loss:
             best_val_loss = val_loss
+            best_val_acc = val_accuracy
             best_model_state = model.state_dict()
             epochs_no_improve = 0
         else:
             epochs_no_improve += 1
 
-        # Early stopping
-        if epochs_no_improve >= patience:
-            print(f'Early stopping at epoch {epoch+1}')
-            break
+            # Early stopping
+            if epochs_no_improve >= patience and epoch < 9:
+                print(f'Early stopping at epoch {epoch+1}')
+                break
 
     # Save the best model
-    torch.save(best_model_state, 'model_info/model1/model1.pth')
+    torch.save(best_model_state, f'model_info/{model_name}/{model_name}.pth')
     print('Best model saved with validation loss:', best_val_loss)
 
-def evaluate_model(model):
+    # Save Performance
+    f = open(f'model_info/{model_name}/valid_performance.txt', 'w')
+    f.write(f'Validation Loss: {best_val_loss:.2f}, Validation Accuracy: {best_val_acc*100:.2f}%')
+    f.close()
+
+def evaluate_model(model, model_name):
     _ , _ , test_loader = load_all_data()
-    # Example: Iterate through the test dataset
-    model.load_state_dict(torch.load('model_info/model1/model1.pth'))
+    # Load Best Model
+    model.load_state_dict(torch.load(f'model_info/{model_name}/{model_name}.pth'))
     model.eval()
     test_inputs, test_labels = next(iter(test_loader))
     test_outputs = model(test_inputs)
@@ -82,6 +89,6 @@ def evaluate_model(model):
     print(f"Total number of test samples: {len(test_labels)}")
     print(f"Accuracy: {correct_predictions / len(test_labels) * 100:.2f}%")
 
-    f = open('model_info/model1/performance.txt', 'w')
+    f = open(f'model_info/{model_name}/test_performance.txt', 'w')
     f.write(f'Test Accuracy: {correct_predictions / len(test_labels) * 100:.2f}%')
     f.close()
