@@ -54,4 +54,4 @@ if __name__ == "__main__":
     data_folder = (
         "processed_data/train"  # Use the folder where your processed images are stored
     )
-    show_sample_images_side_by_side(data_folder, samples_per_class=5)
+    show_sample_images_side_by_side(data_folder, samples_per_class=15)

@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from PIL import Image
 
 
-def get_sample_pixel_intensity(data_folder, samples_per_class=5):
+def get_sample_pixel_intensity(data_folder, samples_per_class=15):
     sample_intensities = {}
     for class_folder in os.listdir(data_folder):
         class_path = os.path.join(data_folder, class_folder)
