@@ -45,3 +45,9 @@ if __name__ == "__main__":
     output_folder = "processed_data/train"
 
     process_images(input_folder, output_folder)
+
+if __name__ == "__main__":
+    input_folder = "data/test"
+    output_folder = "processed_data/test"
+
+    process_images(input_folder, output_folder)
