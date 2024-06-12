@@ -3,19 +3,19 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 
-class Model1(nn.Module):
+class Model3(nn.Module):
     def __init__(self):
-        super(Model1, self).__init__()
+        super(Model3, self).__init__()
 
         self.conv_layer = nn.Sequential(
             nn.Conv2d(
-                in_channels=1, out_channels=16, kernel_size=3, padding=1
+                in_channels=1, out_channels=16, kernel_size=5, padding=2
             ),  # Shape: (48, 48, 16)
             nn.BatchNorm2d(16),  # Batch Normalization layer
             nn.LeakyReLU(),
             nn.AvgPool2d(2, 2),  # Shape: (24, 24, 16)
             nn.Conv2d(
-                in_channels=16, out_channels=32, kernel_size=3, padding=1
+                in_channels=16, out_channels=32, kernel_size=5, padding=2
             ),  # Shape: (24, 24, 32)
             nn.BatchNorm2d(32),  # Batch Normalization layer
             nn.LeakyReLU(),
