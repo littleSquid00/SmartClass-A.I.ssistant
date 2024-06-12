@@ -22,9 +22,9 @@ transform = transforms.Compose(
     ]
 )
 
-# Load your custom dataset
+
 dataset = datasets.ImageFolder(root="./processed_data/alldataset", transform=transform)
-num_classes = 4  # Number of classes in your dataset
+num_classes = 4  # Number of classes
 
 # Split dataset into train, validation, and test sets
 indices = list(range(len(dataset)))
