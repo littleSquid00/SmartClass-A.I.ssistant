@@ -10,8 +10,8 @@ Team Members - Chit Chit Myet Cheal Zaw (40110140)
 ### Project Structure
 1. `OriginalityForm` folder:
     Contains Expectations of Originality forms, signed by each student, which attest to the originality of the work.
-2. `Emotions` folder:
-    The Dataset containing all the images. The images are split into different classes (Angry, Happy, Neutral, and Engaged), each of which is further split into training and test folders. More information regarding the Dataset can be found in the `DatasetExplanation.txt` file.
+2. `data` folder:
+    The Dataset containing all the images. The images are split into different classes (Angry, Happy, Neutral, and Focused), each of which is further split into training and test folders. More information regarding the Dataset can be found in the `DatasetExplanation.txt` file.
 3. `Report.pdf` file:
     Report detailing our findings, methodology, and analysis for project part 1.
 4. `DatasetExplanation.txt` file:
