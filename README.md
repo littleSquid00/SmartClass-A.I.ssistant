@@ -39,3 +39,34 @@ When in the root directory of the project, run the following in the terminal (py
 2. `. venv/bin/activate` on linux or `.\venv\Scripts\activate` on windows
 3. `pip install -r requirements.txt`
 4. `python DataVisualization.py`
+
+### Training
+
+When in the root directory of the project, run the following in the terminal (python >= 3.10 may be required) to train all 3 models:
+
+`python code/train_model.py`
+
+This script trains each model for a maximum of 20 epochs and uses early stopping if the validation loss does not improve for 5 consecutive epochs. It saves the best model found in a .pth file in the root directory.
+
+### Evaluation
+
+#### Evaluation on Test Dataset
+To evaluate the performance of each of the three models on the test dataset, run the following in the terminal:
+
+`python code/evaluate_model.py`
+
+Note that a confusion matrix plot is created for each model in this process and to move onto the evaluation of the next model, you need to close the generated plot.
+
+#### Evaluation of Specific Image using A Model
+
+To predict the class corresponding to a given image, edit the predict_image.py file in the following 2 ways:
+- Line 8: Enter the path to the saved model parameters of the model you want to use (i.e. <model_name>_best_model.pth)
+- Line 52: Change the image_path variable to the path of the image you want to predict the class of.
+
+Then run the following in the terminal: 
+`python code/predict_image.py`
+
+
+
+
+
