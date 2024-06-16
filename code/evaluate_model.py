@@ -1,7 +1,7 @@
 import torch
 from torchvision import transforms, datasets
 from torch.utils.data import DataLoader
-from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.metrics import classification_report, confusion_matrix, f1_score, precision_score, recall_score
 import seaborn as sns
 import matplotlib.pyplot as plt
 from model import CNN, CNNVariant1, CNNVariant2
@@ -31,6 +31,25 @@ for model_name in models:
     models[model_name].to(device)
     models[model_name].eval()
 
+#making table
+def dict_to_table(data):
+    rows = ['angry', 'happy', 'focused', 'neutral', 'macro avg', 'weighted avg', 'micro avg']
+    columns = ['precision', 'recall', 'f1-score', 'accuracy']
+    header = f"{'':<12} {'Precision':<10} {'Recall':<10} {'F1-Score':<10} {'Accuracy':<10}\n"
+    header += "-" * 52 + "\n"
+    
+    table = header
+    
+    for row in rows:
+        if row in data:
+            line = f"{row:<12} "
+            for col in columns:
+                if col in data[row]:
+                   line += f"{data[row][col]:<10.4f} "
+                elif col == 'accuracy':
+                    line += f"{data['accuracy']:<10.4f} "
+            table += line.strip() + "\n"
+    return table
 
 # evaluate a model
 def evaluate_model(model, model_name):
@@ -48,7 +67,13 @@ def evaluate_model(model, model_name):
 
     # classification report
     print(f"Classification Report for {model_name}:")
-    print(classification_report(y_true, y_pred, target_names=dataset.classes, digits=4))
+    report=classification_report(y_true, y_pred, target_names=dataset.classes, digits=4, output_dict=True)
+    precision_micro = precision_score(y_true, y_pred, average='micro')
+    recall_micro = recall_score(y_true, y_pred, average='micro')
+    f1_micro = f1_score(y_true, y_pred, average='micro')
+    report['micro avg']={'precision':precision_micro, 'recall':recall_micro, 'f1-score':f1_micro}
+    print(dict_to_table(report))
+    
 
     # confusion matrix
     cm = confusion_matrix(y_true, y_pred)
@@ -69,3 +94,4 @@ def evaluate_model(model, model_name):
 # Evaluate all models
 for model_name, model in models.items():
     evaluate_model(model, model_name)
+
