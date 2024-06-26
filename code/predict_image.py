@@ -49,7 +49,7 @@ def predict_image(image_path):
 
 
 # Path to the image
-image_path = "./processed_data/alldataset/happy/35101.jpg"
+image_path = "./Final_Images/Age/Senior/Focused/27967.jpg"
 
 # Predict the class of the image
 predicted_class = predict_image(image_path)
