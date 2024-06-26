@@ -7,8 +7,8 @@ import numpy as np
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from torchvision import transforms, datasets
 
-# Assuming CNNVariant2 is your model class
-from model import CNNVariant2  # Adjust the import based on your actual model classes
+# importing the model
+from model import CNNVariant2
 
 # Hyperparameters
 batch_size = 64
@@ -25,7 +25,7 @@ transform = transforms.Compose(
     ]
 )
 
-# Load your dataset
+# Load dataset
 dataset = datasets.ImageFolder(root="./processed_data/alldataset", transform=transform)
 num_classes = 4  # Number of classes
 
