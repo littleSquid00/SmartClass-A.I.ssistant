@@ -96,9 +96,9 @@ def train_model(model, model_name):
 
 # Train all models
 models = {
-    "Main_Model": CNN(num_classes=num_classes),
-    "Variant1": CNNVariant1(num_classes=num_classes),
-    "Variant2": CNNVariant2(num_classes=num_classes),
+    # "Main_Model": CNN(num_classes=num_classes),
+    # "Variant1": CNNVariant1(num_classes=num_classes),
+    "Variant2.1": CNNVariant2(num_classes=num_classes)
 }
 
 for model_name, model in models.items():
